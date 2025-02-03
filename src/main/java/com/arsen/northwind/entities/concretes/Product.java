@@ -2,7 +2,17 @@ package com.arsen.northwind.entities.concretes;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product {
@@ -12,8 +22,6 @@ public class Product {
     @Column(name = "product_id")
     private int id;
 
-    @Column(name = "category_id")
-    private int categoryId;
 
     @Column(name = "product_name")
     private String productName;
@@ -27,64 +35,11 @@ public class Product {
     @Column(name = "quantity_per_unit")
     private String quantityPerUnit;
 
-    public Product(int id, int categoryId, String productName, double unitPrice, int unitsInStock, String quantityPerUnit) {
-        this.id = id;
-        this.categoryId = categoryId;
-        this.productName = productName;
-        this.unitPrice = unitPrice;
-        this.unitsInStock = unitsInStock;
-        this.quantityPerUnit = quantityPerUnit;
-    }
 
-    public Product() {
+    @ManyToOne()
+    @JoinColumn(name="category_id")
+    private Category category;
 
-    }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public int getUnitsInStock() {
-        return unitsInStock;
-    }
-
-    public void setUnitsInStock(int unitsInStock) {
-        this.unitsInStock = unitsInStock;
-    }
-
-    public String getQuantityPerUnit() {
-        return quantityPerUnit;
-    }
-
-    public void setQuantityPerUnit(String quantityPerUnit) {
-        this.quantityPerUnit = quantityPerUnit;
-    }
 }
